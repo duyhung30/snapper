@@ -20,7 +20,8 @@ export const MaterialTopTabs = withLayoutContext<
 
 export default function TabsLayout() {
   return (
-    <SafeAreaView className='flex-1 bg-[#181614]'>
+    // <SafeAreaView className='flex-1 bg-[#181614]'>
+    <SafeAreaView className='flex-1' >
       <MaterialTopTabs
         // className='mt-10'
         tabBarPosition='bottom'

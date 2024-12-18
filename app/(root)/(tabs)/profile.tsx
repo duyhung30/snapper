@@ -15,6 +15,7 @@ import { Link, router } from 'expo-router'
 import { useRef, useState } from 'react'
 import { HoldItem } from 'react-native-hold-menu'
 import * as ImagePicker from 'expo-image-picker'
+import Avatar from '@/components/Avatar'
 import CustomAlert from '@/components/CustomAlert'
 
 const Profile = () => {
@@ -29,7 +30,7 @@ const Profile = () => {
   // Get the avatar URL from PocketBase
   const getAvatarUrl = () => {
     if (user?.avatar) {
-      return `https://gate-member.pockethost.io/api/files/users/${user.id}/${user.avatar}`
+      return `https://gate-member.pockethost.io/api/files/users/${user.id}/${user.avatar}?timestamp=${new Date().getTime()}`
     }
     return require('@/assets/images/avatar.png') // fallback image
   }
@@ -130,7 +131,7 @@ const Profile = () => {
             ]}
           >
             <View className="relative">
-              <Image
+              {/* <Image
                 source={
                   typeof getAvatarUrl() === 'string'
                     ? { uri: getAvatarUrl() }
@@ -140,8 +141,8 @@ const Profile = () => {
                 contentFit="cover"
                 transition={150}
                 cachePolicy="memory-disk"
-              />
-              {/* <Avatar size={170} /> */}
+              /> */}
+              <Avatar size={170} userId={user?.id} />
               {isLoading && (
                 <View
                   className="absolute inset-0 items-center justify-center bg-black/30"

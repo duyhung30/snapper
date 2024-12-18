@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
   Dimensions,
 } from 'react-native'
 import React, { useState, useCallback, useEffect } from 'react'
@@ -12,6 +13,8 @@ import Entypo from '@expo/vector-icons/Entypo'
 import { router, Link, useFocusEffect } from 'expo-router'
 import { usePocketBase } from '@/context/pocketbase'
 import { User } from '@/types/type'
+import Avatar from '@/components/Avatar'
+import { useAvatarStore } from '@/store'
 
 const { width: windowWidth } = Dimensions.get('window')
 
@@ -20,6 +23,7 @@ const ChatList = () => {
   const [users, setUsers] = useState<User[]>()
   const [refreshing, setRefreshing] = useState(false)
   const { pb } = usePocketBase()
+  const { setAvatarUrl } = useAvatarStore()
   const currentUserId = pb?.authStore.model?.id // Get currently logged-in user ID
 
   const onRefresh = React.useCallback(() => {
@@ -28,15 +32,15 @@ const ChatList = () => {
   }, [])
 
   function onGoToChatRoom(userId: string) {
-    router.push(`/(chat)/chat/${userId}`)
+    router.push(`/(root)/(tabs)/(chat)/chat/${userId}`)
   }
 
-  const userAvatarUrl = (userId: string, avatar: string) => {
-    if (avatar) {
-      return { uri: `https://gate-member.pockethost.io/api/files/users/${userId}/${avatar}` }
-    }
-    return require('@/assets/images/blank_avatar.png')
-  }
+  // const userAvatarUrl = (userId: string, avatar: string) => {
+  //   if (avatar) {
+  //     return { uri: `https://gate-member.pockethost.io/api/files/users/${userId}/${avatar}` }
+  //   }
+  //   return require('@/assets/images/blank_avatar.png')
+  // }
 
   const fetchUsers = async () => {
     try {
@@ -45,7 +49,19 @@ const ChatList = () => {
         sort: 'created',
         filter: `id != '${currentUserId}'`,
       })
-      setUsers(users)
+
+      if (users) {
+        // Cache avatar URLs for all users
+        users.forEach(user => {
+          if (user.avatar) {
+            setAvatarUrl(
+              user.id,
+              `https://gate-member.pockethost.io/api/files/users/${user.id}/${user.avatar}`
+            )
+          }
+        })
+        setUsers(users)
+      }
     } catch (error) {
       console.error('Failed to fetch messages:', error)
     } finally {
@@ -71,11 +87,12 @@ const ChatList = () => {
       >
         <View className='flex flex-row items-center justify-between'>
           <View className='flex flex-row items-center'>
-            <Image
+            {/* <Image
               className='w-[40px] h-[40px] rounded-full'
               // source={{ uri: item.avatar }}
               source={userAvatarUrl(item.id, item.avatar)}
-            />
+            /> */}
+            <Avatar size={40} userId={item.id} key={`avatar-${item.id}`} />
             <Text className='font-JakartaSemiBold text-xl ml-3'>
               {item.username}
             </Text>
@@ -83,6 +100,20 @@ const ChatList = () => {
           <Entypo name='chevron-right' size={24} color='black' />
         </View>
       </TouchableOpacity>
+    </View>
+  )
+
+  const renderEmptyList = () => (
+    <View className='flex-1 items-center justify-center p-4'>
+      <Text className='font-JakartaMedium text-gray-500 text-center'>
+        No users found
+      </Text>
+    </View>
+  )
+
+  const renderLoader = () => (
+    <View className='flex-1 items-center justify-center'>
+      <ActivityIndicator size="large" color="#ffffff" />
     </View>
   )
   return (
@@ -108,14 +139,28 @@ const ChatList = () => {
         </View>
       </View>
 
-      <FlatList
+      {/* <FlatList
         data={users}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         keyboardShouldPersistTaps={'handled'}
         refreshing={refreshing}
         onRefresh={onRefresh}
-      />
+      /> */}
+      {isLoading ? (
+        renderLoader()
+      ) : (
+        <FlatList
+          data={users}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          ListEmptyComponent={renderEmptyList}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          keyboardShouldPersistTaps='handled'
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </SafeAreaView>
   )
 }

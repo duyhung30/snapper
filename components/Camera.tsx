@@ -10,6 +10,8 @@ import {
   // Image,
   Dimensions,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
   TextInput,
 } from 'react-native'
 import { Image } from 'expo-image'
@@ -229,8 +231,8 @@ const Camera = () => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={toggleCameraFacing}> <Animated.View style={animatedStyle}>
-                <Ionicons name="sync-sharp" size={44} color="black" />
-              </Animated.View>
+              <Ionicons name="sync-sharp" size={44} color="black" />
+            </Animated.View>
             </TouchableOpacity>
           </View>
         </>
@@ -249,15 +251,21 @@ const Camera = () => {
               priority="high"
             />
             <View className='absolute bottom-2 w-full items-center'>
-              <TextInput
-                className='bg-black/50 w-1/2 h-[44px] rounded-3xl items-center justify-center text-gray-200 tex-xl'
-                placeholder='Add a caption'
-                textAlign='center'
-                value={caption}
-                onChangeText={setCaption}
-                editable={!isUploading}
-                multiline={true}
-              />
+              <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                className='absolute bottom-0 w-full items-center'
+              >
+                <TextInput
+                  className='bg-black/50 w-1/2 h-[44px] rounded-3xl items-center justify-center font-JakartaSemiBold text-[16px] text-gray-200'
+                  placeholder='Add a caption'
+                  textAlign='center'
+                  value={caption}
+                  onChangeText={setCaption}
+                  editable={!isUploading}
+                  multiline={true}
+                // textAlignVertical='center'
+                />
+              </KeyboardAvoidingView>
             </View>
           </View>
 

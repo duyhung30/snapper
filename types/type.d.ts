@@ -1,4 +1,5 @@
-import { TextInputProps, TouchableOpacityProps } from 'react-native'
+import { ImageStyle } from 'expo-image'
+import { StyleProp, TextInputProps, TouchableOpacityProps } from 'react-native'
 
 declare interface ButtonProps extends TouchableOpacityProps {
   title: string
@@ -20,12 +21,13 @@ declare interface InputFieldProps extends TextInputProps {
   className?: string
 }
 
-// declare interface SwipeableViewProps {
-//   children: React.ReactNode;
-//   onSwipeLeft?: () => void;
-// onSwipeRight ?: () => void;
-// }
-// New Like interface to match your likes collection
+declare interface AvatarProps {
+  size?: number
+  userId?: string
+  // className?: string
+  styles?: StyleProp<ImageStyle>
+}
+
 
 declare interface User {
   id: string
@@ -106,4 +108,16 @@ declare interface Message {
       avatar: string
     }
   }
+}
+
+// declare interface AvatarStore {
+//   avatarUrl: string | null
+//   setAvatarUrl: (url: string) => void
+// }
+
+declare interface AvatarStore {
+  avatars: Record<string, string>;  // Map of userId to avatar URL
+  getAvatarUrl: (userId: string) => string | null;
+  setAvatarUrl: (userId: string, url: string) => void;
+  clearAvatars: () => void;
 }

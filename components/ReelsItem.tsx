@@ -21,6 +21,7 @@ import { ImageSliderType } from '@/data/SliderData'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import CommentModal from './Comment'
 import { Post } from '@/types/type'
+import Avatar from './Avatar'
 import { usePocketBase } from '@/context/pocketbase'
 
 type Props = {
@@ -193,7 +194,7 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
           </View>)}
           {/* <Text className='font-JakartaBold text-lg'> {pb?.authStore.model?.username} </Text> */}
           <View className='flex flex-row items-center pt-3'>
-            <Image
+            {/* <Image
               // src={item.expand?.author_id?.avatar}
               // source={require('@/assets/images/blank_avatar.png')}
               source={
@@ -202,14 +203,8 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
                   : require('@/assets/images/blank_avatar.png')
               }
               className='w-[30px] h-[30px] rounded-full border-0 border-black'
-            // style={{
-            //   width: 30,
-            //   height: 30,
-            //   borderRadius: 50,
-            //   borderWidth: 2,
-            //   borderColor: 'black',
-            // }}
-            />
+            /> */}
+            <Avatar size={30} userId={item.expand?.author_id?.id} />
             <Text className='font-JakartaBold text-xl pl-2'>
               {item.expand?.author_id?.username || 'Unknown user'}
             </Text>

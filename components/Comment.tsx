@@ -28,6 +28,7 @@ import { ReactNativeModal } from 'react-native-modal'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import React, { useState, useEffect, memo } from 'react'
 import { Comment } from '@/types/type'
+import Avatar from './Avatar'
 import { usePocketBase } from '@/context/pocketbase'
 import { UnsubscribeFunc } from 'pocketbase'
 
@@ -211,7 +212,7 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
       // }}
       className='flex flex-row p-[10px] mb-[8px] bg-[#f5f5f5] rounded-xl'
     >
-      <Image
+      {/* <Image
         // src={item.expand?.author?.avatar}
         // source={require('@/assets/images/blank_avatar.png')}
         source={
@@ -222,9 +223,10 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
             : require('@/assets/images/blank_avatar.png')
         }
         className='w-[30px] h-[30px] rounded-full border-0 border-black mr-3'
-      />
-      <View>
-        <Text style={{ fontWeight: '600', marginBottom: 4 }}>
+      /> */}
+      <Avatar size={30} userId={item.expand?.author?.id} />
+      <View className='ml-3'>
+        <Text style={{ fontWeight: '600', marginBottom: 4, }}>
           {item.expand?.author?.username || 'Anonymous'}
         </Text>
         <Text>{item.text}</Text>

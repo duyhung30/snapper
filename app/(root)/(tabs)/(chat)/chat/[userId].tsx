@@ -24,6 +24,8 @@ import { Message } from '@/types/type'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Entypo from '@expo/vector-icons/Entypo'
 import { DotIndicator } from 'react-native-reanimated-indicators'
+import Avatar from '@/components/Avatar'
+import { useAvatarStore } from '@/store'
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState<Message[]>()
@@ -63,6 +65,11 @@ const ChatRoom = () => {
         if (userData?.avatar) {
           const avatarUrl = `https://gate-member.pockethost.io/api/files/users/${userIdString}/${userData.avatar}`;
           setReceiverAvatar(avatarUrl)
+
+          // Add this: Update the avatar store for the receiver
+          const { setAvatarUrl } = useAvatarStore.getState()
+          setAvatarUrl(userIdString, avatarUrl)
+
         } else {
           setReceiverAvatar(''); // or null, depending on how you want to handle no avatar
         }
@@ -196,27 +203,28 @@ const ChatRoom = () => {
 
   const renderMessage = ({ item }: { item: Message }) => (
     <View
-      className={`flex-row my-2 items-end ${item.sender === currentUserId
+      className={`flex-row my-2 items-center ${item.sender === currentUserId
         ? 'justify-end pr-2'
         : 'justify-start pl-2'
         }`}
     >
       {/* Show avatar only for messages from the other user */}
       {item.sender !== currentUserId && (
-        <Image
-          source={
-            receiverAvatar
-              ? { uri: receiverAvatar }
-              : require('@/assets/images/blank_avatar.png')
-          }
-          className='w-[30px] h-[30px] rounded-full mr-2'
-          transition={1000}
-          cachePolicy='memory-disk' // Enable caching
-        />
+        // <Image
+        //   source={
+        //     receiverAvatar
+        //       ? { uri: receiverAvatar }
+        //       : require('@/assets/images/blank_avatar.png')
+        //   }
+        //   className='w-[30px] h-[30px] rounded-full mr-2'
+        //   transition={1000}
+        //   cachePolicy='memory-disk' // Enable caching
+        // />
+        <Avatar size={30} userId={Array.isArray(userId) ? userId[0] : userId} styles={{ marginRight: 10 }} />
       )}
 
       <View
-        className={`p-3 rounded-lg max-w-[80%] ${item.sender === currentUserId
+        className={`p-3 rounded-lg max-w-[80%] ml-2 ${item.sender === currentUserId
           ? 'bg-blue-500 rounded-xl'
           : 'bg-gray-300 rounded-xl'
           }`}
@@ -234,7 +242,7 @@ const ChatRoom = () => {
   const ListFooterComponent = () =>
     isTyping ? (
       <View className='flex flex-row items-center'>
-        <Image
+        {/* <Image
           source={
             receiverAvatar
               ? { uri: receiverAvatar }
@@ -243,7 +251,8 @@ const ChatRoom = () => {
           className='w-[30px] h-[30px] rounded-full mr-2 ml-2'
           transition={1000}
           cachePolicy='memory-disk' // Enable caching
-        />
+        /> */}
+        <Avatar size={30} userId={Array.isArray(userId) ? userId[0] : userId} />
         <View className='ml-2 mb-2 '>
           <DotIndicator
             color='#666'
@@ -264,7 +273,7 @@ const ChatRoom = () => {
     ) : null
 
   return (
-    <SafeAreaView className='flex-1 bg-white'>
+    <SafeAreaView className='flex-1'>
       {/* Header */}
       <View className='flex-row items-center p-4 shadow'>
         {/* Back button positioned absolutely on the left */}
@@ -277,7 +286,7 @@ const ChatRoom = () => {
         {/* Center container for avatar and name */}
         <View className='flex-1 flex-row justify-center items-center'>
           <View className='flex-row items-center'>
-            <Image
+            {/* <Image
               source={
                 receiverAvatar
                   ? { uri: receiverAvatar }
@@ -286,7 +295,8 @@ const ChatRoom = () => {
               className='w-[40px] h-[40px] rounded-full mr-2'
               transition={1000}
               cachePolicy='memory-disk' // Enable caching
-            />
+            /> */}
+            <Avatar size={30} userId={Array.isArray(userId) ? userId[0] : userId} styles={{ marginRight: 10 }} />
             <Text className='font-JakartaSemiBold text-lg'>{receiverName}</Text>
           </View>
         </View>
@@ -335,7 +345,8 @@ const ChatRoom = () => {
         </View>
 
         {Platform.OS === 'ios' && (
-          <View style={{ height: 20, backgroundColor: 'white' }} />
+          // <View style={{ height: 20, backgroundColor: 'white' }} />
+          <View style={{ height: 20 }} />
         )}
       </KeyboardAvoidingView>
     </SafeAreaView>

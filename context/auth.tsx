@@ -8,6 +8,7 @@ import React, {
   ReactNode,
 } from 'react'
 import { usePocketBase } from './pocketbase'
+import { useAvatarStore } from '@/store'
 
 interface User {
   id: string;
@@ -29,7 +30,6 @@ interface AuthContextType {
   signOut: () => Promise<void>
   updateUserAvatar: (imageUri: string) => Promise<{ success: boolean; error?: string }>
 
-  // avatarKey: number  // Add this new property
 }
 
 interface SignUpData {
@@ -58,24 +58,32 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   // const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const router = useRouter()
   const segments = useSegments()
-
-  // const [avatarKey, setAvatarKey] = useState(0)  // Add this new state
+  const { setAvatarUrl } = useAvatarStore()
 
   // Check authentication state when app loads
   useEffect(() => {
     if (pb) {
       const model = pb.authStore.model
-      setUser(
-        model
-          ? {
-            id: model.id,
-            email: model.email,
-            username: model.username,
-            password: model.password,
-            avatar: model.avatar,
-          }
-          : null,
-      )
+      if (model) {
+        setUser(
+          model
+            ? {
+              id: model.id,
+              email: model.email,
+              username: model.username,
+              password: model.password,
+              avatar: model.avatar,
+            }
+            : null,
+        )
+        // Initialize avatar URL if avatar exists
+        if (model.avatar) {
+          setAvatarUrl(model.id, `https://gate-member.pockethost.io/api/files/users/${model.id}/${model.avatar}`)
+        }
+      } else {
+        setUser(null)
+      }
+
       setIsLoading(false)
     }
   }, [pb])
@@ -119,7 +127,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       )
 
 
-      // setAvatarKey(prev => prev + 1)  // Increment the key when avatar updates
+      // setAvatarUrl(`https://gate-member.pockethost.io/api/files/users/${user.id}/${user.avatar}?timestamp=${new Date().getTime()}`)
+
+      setAvatarUrl(user.id, `https://gate-member.pockethost.io/api/files/users/${user.id}/${updatedRecord.avatar}`)
 
       return { success: true }
     } catch (error) {
@@ -150,6 +160,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         password: authData.record.password,
         avatar: authData.record.avatar,
       })
+
+      // After successful sign in, set the avatar URL
+      if (authData.record.avatar) {
+        setAvatarUrl(authData.record.id, `https://gate-member.pockethost.io/api/files/users/${authData.record.id}/${authData.record.avatar}`)
+      }
 
       return { success: true }
     } catch (error) {
@@ -220,6 +235,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
       pb.authStore.clear()
       setUser(null)
+
+      // setAvatarUrl('')
     } catch (error) {
       // console.error('Sign out error:', error)
       console.log('Sign out error:', error)
@@ -234,7 +251,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       signUp,
       signOut,
       updateUserAvatar,
-      // avatarKey
     }}>
       {/*
         {errorMessage && (

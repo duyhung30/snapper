@@ -11,7 +11,8 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get('window')
 const Home = () => {
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#181614' }} >
+    // <View style={{ flex: 1, backgroundColor: '#181614' }} >
+    <View style={{ flex: 1 }} >
       {/* <Camera /> */}
       {/*
       */}
