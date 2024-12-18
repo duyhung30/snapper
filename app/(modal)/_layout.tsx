@@ -5,12 +5,13 @@ import { Stack } from 'expo-router'
 const ModalLayout = () => {
   return (
     <Stack>
-      <Stack.Screen name='comment' options={{
+      <Stack.Screen name='camera' options={{
         presentation: 'modal',
         animation: 'slide_from_bottom',
         headerShown: false,
         contentStyle: {
           backgroundColor: 'transparent',
+          height: '90%',
         }
       }} />
     </Stack>

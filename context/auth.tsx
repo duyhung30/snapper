@@ -10,11 +10,12 @@ import React, {
 import { usePocketBase } from './pocketbase'
 
 interface User {
-  // id: string;
+  id: string;
   email: string
   password: string
   username?: string
   // Add other user properties as needed
+  avatar?: string // Added avatar field
 }
 
 interface AuthContextType {
@@ -26,6 +27,9 @@ interface AuthContextType {
   ) => Promise<{ success: boolean; error?: string }>
   signUp: (data: SignUpData) => Promise<{ success: boolean; error?: string }>
   signOut: () => Promise<void>
+  updateUserAvatar: (imageUri: string) => Promise<{ success: boolean; error?: string }>
+
+  // avatarKey: number  // Add this new property
 }
 
 interface SignUpData {
@@ -55,6 +59,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const router = useRouter()
   const segments = useSegments()
 
+  // const [avatarKey, setAvatarKey] = useState(0)  // Add this new state
+
   // Check authentication state when app loads
   useEffect(() => {
     if (pb) {
@@ -62,11 +68,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       setUser(
         model
           ? {
-              // id: model.id,
-              email: model.email,
-              username: model.username,
-              password: model.password,
-            }
+            id: model.id,
+            email: model.email,
+            username: model.username,
+            password: model.password,
+            avatar: model.avatar,
+          }
           : null,
       )
       setIsLoading(false)
@@ -88,6 +95,42 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [user, segments, isLoading])
 
+  const updateUserAvatar = async (imageUri: string) => {
+    try {
+      if (!pb || !user) throw new Error('Not authenticated')
+
+      // Create FormData object
+      const formData = new FormData()
+      formData.append('avatar', {
+        uri: imageUri,
+        name: 'avatar.jpg',
+        type: 'image/jpeg',
+      } as any)
+
+      // Update user record in PocketBase
+      const updatedRecord = await pb.collection('users').update(user.id, formData)
+
+      // Update local user state with new avatar
+      setUser(prev =>
+        prev ? {
+          ...prev,
+          avatar: updatedRecord.avatar,
+        } : null
+      )
+
+
+      // setAvatarKey(prev => prev + 1)  // Increment the key when avatar updates
+
+      return { success: true }
+    } catch (error) {
+      console.error('Avatar update error:', error)
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to update avatar',
+      }
+    }
+  }
+
   const signIn = async (email: string, password: string) => {
     try {
       if (!pb) throw new Error('PocketBase not initialized')
@@ -101,10 +144,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       console.log('Sign in successful:', authData) // Log successful sign-in data
 
       setUser({
-        // id: authData.record.id,
+        id: authData.record.id,
         email: authData.record.email,
         username: authData.record.username,
         password: authData.record.password,
+        avatar: authData.record.avatar,
       })
 
       return { success: true }
@@ -183,7 +227,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   }
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{
+      user,
+      isLoading,
+      signIn,
+      signUp,
+      signOut,
+      updateUserAvatar,
+      // avatarKey
+    }}>
       {/*
         {errorMessage && (
         <Text style={{ color: '#e74c3c', fontSize: 14 }}>{errorMessage}</Text>

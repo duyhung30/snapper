@@ -18,7 +18,7 @@ const CustomHeader = () => {
           <Ionicons name='person-circle-outline' size={34} color='black' />
         </TouchableOpacity>
       </Link>
-      <Link href={'/(root)/(tabs)/chat'} asChild>
+      <Link href={'/(root)/(tabs)/(chat)'} asChild>
         <TouchableOpacity className='p-3 rounded-full'>
           {/*
           <MaterialCommunityIcons name='chat-outline' size={34} color='black' />

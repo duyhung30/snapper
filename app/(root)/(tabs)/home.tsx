@@ -11,11 +11,11 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get('window')
 const Home = () => {
 
   return (
-    <View style={{ flex: 1 }} >
+    <View style={{ flex: 1, backgroundColor: '#181614' }} >
       {/* <Camera /> */}
-      {/* 
+      {/*
       */}
-        <CustomHeader />
+      <CustomHeader />
       <ImageReels />
     </View>
   )

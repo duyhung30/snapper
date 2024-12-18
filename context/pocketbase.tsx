@@ -8,7 +8,9 @@ import React, {
 import { View, Text } from 'react-native'
 import PocketBase, { AsyncAuthStore } from 'pocketbase'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import eventsource from 'react-native-sse';
+// @ts-ignore
+global.EventSource = eventsource;
 // import { POCKETBASE_URL } from '../config/constants';
 
 interface PocketBaseContextType {
@@ -61,14 +63,14 @@ export const PocketBaseProvider: React.FC<{ children: ReactNode }> = ({
 
         console.log('Creating PocketBase instance...')
         // use ngrok to host the pocketbase server
-        // const pbInstance = new PocketBase('https://1b9a-171-224-180-195.ngrok-free.app', store);
+        const pbInstance = new PocketBase('https://gate-member.pockethost.io/', store);
         // const pbInstance = new PocketBase('http://10.0.2.2:8090', store) //works for android emulator
-        const pbInstance = new PocketBase('https://pocketbase.io', store) //works for android emulator
+        // const pbInstance = new PocketBase('https://pocketbase.io', store) //works for android emulator
 
         // Add this for debugging
         pbInstance.beforeSend = function (url, options) {
-          console.log('Making request to:', url)
-          console.log('Request options:', options)
+          // console.log('Making request to:', url)
+          // console.log('Request options:', options)
           return { url, options }
         }
 
@@ -105,7 +107,7 @@ export const PocketBaseProvider: React.FC<{ children: ReactNode }> = ({
          </View>
        )}
 
-      */}     
+      */}
     </PocketBaseContext.Provider>
   )
 }

@@ -117,6 +117,7 @@ const Camera = () => {
     setCapturedImage(null)
     setPickedImage(null)
     setPreviewVisible(false)
+    setCaption('')
     // setImageUri(null)
   }
 
@@ -153,7 +154,7 @@ const Camera = () => {
 
       // Add metadata
       formData.append('caption', caption);
-      formData.append('user', pb?.authStore.model?.id); // Get current user ID
+      formData.append('author_id', pb?.authStore.model?.id); // Get current user ID
 
       const record = await pb?.collection('posts').create(formData, {
         requestKey: null,
@@ -227,8 +228,7 @@ const Camera = () => {
               <Ionicons name="radio-button-on-sharp" size={90} color="black" />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={toggleCameraFacing}>
-              <Animated.View style={animatedStyle}>
+            <TouchableOpacity onPress={toggleCameraFacing}> <Animated.View style={animatedStyle}>
                 <Ionicons name="sync-sharp" size={44} color="black" />
               </Animated.View>
             </TouchableOpacity>
@@ -250,12 +250,13 @@ const Camera = () => {
             />
             <View className='absolute bottom-2 w-full items-center'>
               <TextInput
-                className=' bg-white w-1/2 rounded-3xl items-center justify-center'
+                className='bg-black/50 w-1/2 h-[44px] rounded-3xl items-center justify-center text-gray-200 tex-xl'
                 placeholder='Add a caption'
                 textAlign='center'
                 value={caption}
                 onChangeText={setCaption}
                 editable={!isUploading}
+                multiline={true}
               />
             </View>
           </View>

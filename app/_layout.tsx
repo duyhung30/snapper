@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import 'react-native-reanimated'
 import { PocketBaseProvider } from '@/context/pocketbase'
 import { AuthProvider } from '@/context/auth'
+import { HoldMenuProvider } from 'react-native-hold-menu'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
@@ -39,24 +40,52 @@ export default function RootLayout() {
   return (
     <PocketBaseProvider>
       <AuthProvider>
-        <Stack>
-          <Stack.Screen name='index' options={{ headerShown: false }} />
-          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-          <Stack.Screen name='(root)' options={{ headerShown: false }} />
-          <Stack.Screen name='(chat)' options={{ headerShown: false }} />
+        <HoldMenuProvider theme='dark'>
+          <Stack>
+            <Stack.Screen name='index' options={{ headerShown: false }} />
+            <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+            <Stack.Screen name='(root)' options={{ headerShown: false }} />
+            <Stack.Screen name='(chat)' options={{ headerShown: false }} />
+            {/* <Stack.Screen */}
+            {/*   name='(modal)/camera' */}
+            {/*   options={{ */}
+            {/*     presentation: 'modal', */}
+            {/*     animation: 'slide_from_bottom', */}
+            {/*     headerShown: false, */}
+            {/*     contentStyle: { */}
+            {/*       backgroundColor: 'transparent', */}
+            {/*       height: '90%', */}
+            {/*     }, */}
+            {/*   }} */}
+            {/* /> */}
+            {/**/}
+            {/* <Stack.Screen */}
+            {/*   name='(modal)/imagePicker' */}
+            {/*   options={{ */}
+            {/*     presentation: 'modal', */}
+            {/*     animation: 'slide_from_bottom', */}
+            {/*     headerShown: false, */}
+            {/*     contentStyle: { */}
+            {/*       backgroundColor: 'transparent', */}
+            {/*       height: '90%', */}
+            {/*     }, */}
+            {/*   }} */}
+            {/* /> */}
 
-          {/*
-          <Stack.Screen name='(modal)' options={{
-            presentation: 'modal',
-            headerShown: false,
-            contentStyle: {
-              backgroundColor: 'transparent',
-            },
-          }} />
-          */}
+            <Stack.Screen
+              name='(modal)'
+              options={{
+                presentation: 'modal',
+                headerShown: false,
+                contentStyle: {
+                  backgroundColor: 'transparent',
+                },
+              }}
+            />
 
-          <Stack.Screen name='+not-found' />
-        </Stack>
+            <Stack.Screen name='+not-found' />
+          </Stack>
+        </HoldMenuProvider>
       </AuthProvider>
     </PocketBaseProvider>
   )
