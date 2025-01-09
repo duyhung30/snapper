@@ -25,6 +25,7 @@ import { Image } from 'expo-image'
 import { FlashList } from '@shopify/flash-list'
 import { useRouter } from 'expo-router'
 import { ReactNativeModal } from 'react-native-modal'
+import { DotIndicator } from 'react-native-reanimated-indicators'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import React, { useState, useEffect, memo } from 'react'
 import { Comment } from '@/types/type'
@@ -210,7 +211,7 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
       //   backgroundColor: '#f5f5f5',
       //   borderRadius: 8,
       // }}
-      className='flex flex-row p-[10px] mb-[8px] bg-[#f5f5f5] rounded-xl'
+      className='flex flex-row p-[10px] mb-[8px] bg-general-600 rounded-xl'
     >
       {/* <Image
         // src={item.expand?.author?.avatar}
@@ -226,10 +227,10 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
       /> */}
       <Avatar size={30} userId={item.expand?.author?.id} />
       <View className='ml-3'>
-        <Text style={{ fontWeight: '600', marginBottom: 4, }}>
+        <Text style={{ fontWeight: '600', marginBottom: 4, }} className='text-foreground-default'>
           {item.expand?.author?.username || 'Anonymous'}
         </Text>
-        <Text>{item.text}</Text>
+        <Text className='text-foreground-default'>{item.text}</Text>
         <Text style={{ fontSize: 11, color: '#666', marginTop: 4 }}>
           {/*
         {new Date(item.created).toLocaleDateString()}
@@ -242,11 +243,22 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
 
   const ListFooterComponent = () =>
     isTyping ? (
-      <View className='p-2 bg-[#f5f5f5] rounded-xl'>
-        <Text style={{ fontStyle: 'italic', color: '#666' }}>
-          Someone is typing...
-        </Text>
-      </View>
+        <View className=' mb-2 '>
+          <DotIndicator
+            color='#666'
+            interval={1400}
+            count={3}
+            style={{
+              backgroundColor: '#302b29',
+              width: 60,
+              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 14,
+            }}
+          />
+        </View>
     ) : null
 
   return (
@@ -289,7 +301,7 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
       */}
       <View
         style={{
-          backgroundColor: 'white',
+          backgroundColor: '#181614',
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           // height: windowHeight * 0.6,
@@ -329,11 +341,11 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
             // marginBottom: 5,
           }}
         >
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+          <Text className='font-JakartaSemiBold text-foreground-default' style={{ fontSize: 18, fontWeight: 'bold' }}>
             Comment section
           </Text>
           <TouchableOpacity onPress={onClose}>
-            <Ionicons name='close' size={34} color='black' />
+            <Ionicons name='close' size={34} color='#f3ebe5' />
           </TouchableOpacity>
         </View>
 
@@ -364,9 +376,9 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
             style={{
               flexDirection: 'row',
               padding: 12,
-              borderTopWidth: 1,
-              borderTopColor: '#eee',
-              backgroundColor: 'white',
+              // borderTopWidth: 1,
+              // borderTopColor: '#eee',
+              backgroundColor: '#181614',
               // marginBottom: Platform.OS === 'ios' ? 40 : 20,
             }}
           >
@@ -374,14 +386,14 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
               style={{
                 flex: 1,
                 borderRadius: 20,
-                backgroundColor: '#f5f5f5',
+                backgroundColor: '#302b29',
                 paddingHorizontal: 15,
                 paddingVertical: 12,
                 marginRight: 10,
                 // justifyContent: 'center',
                 // alignItems: 'center',
               }}
-              className='text-black'
+              className='text-foreground-default font-JakartaSemiBold'
               placeholder='Write a comment...'
               value={newComment}
               onChangeText={setNewComment}
@@ -394,13 +406,13 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: newComment.trim() ? '#007AFF' : '#B0B0B0',
+                backgroundColor: newComment.trim() ? '#007AFF' : '#302b29',
                 width: 40,
                 height: 40,
                 borderRadius: 20,
               }}
             >
-              <Ionicons name='send' size={20} color='white' />
+              <Ionicons name='send' size={20} color='#f3ebe5' />
             </TouchableWithoutFeedback>
           </View>
         </GestureHandlerRootView>
@@ -408,7 +420,7 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
 
       {/* Add bottom padding for iOS devices */}
       {Platform.OS === 'ios' && (
-        <View style={{ height: 20, backgroundColor: 'white' }} />
+        <View style={{ height: 20, backgroundColor: "#181614" }} />
       )}
       {/* </KeyboardAvoidingView> */}
     </ReactNativeModal>

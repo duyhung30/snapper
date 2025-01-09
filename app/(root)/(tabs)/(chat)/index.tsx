@@ -52,11 +52,11 @@ const ChatList = () => {
 
       if (users) {
         // Cache avatar URLs for all users
-        users.forEach(user => {
+        users.forEach((user) => {
           if (user.avatar) {
             setAvatarUrl(
               user.id,
-              `https://gate-member.pockethost.io/api/files/users/${user.id}/${user.avatar}`
+              `https://gate-member.pockethost.io/api/files/users/${user.id}/${user.avatar}`,
             )
           }
         })
@@ -76,13 +76,13 @@ const ChatList = () => {
   // )
 
   useEffect(() => {
-    fetchUsers();
+    fetchUsers()
   }, [pb, currentUserId])
 
   const renderItem = ({ item }: { item: User }) => (
     <View className='flex flex-row m-2 w-[${windowWidth}] items-center'>
       <TouchableOpacity
-        className='w-full p-[11px] bg-[#DEDEDE] rounded-xl'
+        className='w-full p-[11px] bg-general-600 rounded-xl'
         onPress={() => onGoToChatRoom(item.id)}
       >
         <View className='flex flex-row items-center justify-between'>
@@ -93,11 +93,11 @@ const ChatList = () => {
               source={userAvatarUrl(item.id, item.avatar)}
             /> */}
             <Avatar size={40} userId={item.id} key={`avatar-${item.id}`} />
-            <Text className='font-JakartaSemiBold text-xl ml-3'>
+            <Text className='font-JakartaSemiBold text-xl text-foreground-default ml-3'>
               {item.username}
             </Text>
           </View>
-          <Entypo name='chevron-right' size={24} color='black' />
+          <Entypo name='chevron-right' size={28} color='#f3ebe5' />
         </View>
       </TouchableOpacity>
     </View>
@@ -113,26 +113,24 @@ const ChatList = () => {
 
   const renderLoader = () => (
     <View className='flex-1 items-center justify-center'>
-      <ActivityIndicator size="large" color="#ffffff" />
+      <ActivityIndicator size='large' color='#ffffff' />
     </View>
   )
   return (
-    <SafeAreaView>
+    <SafeAreaView className='flex-1 bg-general-800'>
       {/* Header */}
       <View className='flex-row items-center p-4 shadow'>
         {/* Back button positioned absolutely on the left */}
         <Link href={'/(root)/(tabs)/home'} asChild>
-          <TouchableOpacity
-            className='absolute left-1 z-10'
-          >
-            <Entypo name="chevron-left" size={34} color="black" />
+          <TouchableOpacity className='absolute left-1 z-10 bg-general-500 p-2 rounded-full'>
+            <Entypo name='chevron-left' size={34} color='#f3ebe5' />
           </TouchableOpacity>
         </Link>
 
         {/* Center container for avatar and name */}
         <View className='flex-1 flex-row justify-center items-center'>
           <View className='flex-row items-center'>
-            <Text className='font-JakartaSemiBold text-xl'>
+            <Text className='font-JakartaSemiBold text-xl text-foreground-default'>
               Messages
             </Text>
           </View>
@@ -150,16 +148,16 @@ const ChatList = () => {
       {isLoading ? (
         renderLoader()
       ) : (
-        <FlatList
-          data={users}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
-          ListEmptyComponent={renderEmptyList}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          keyboardShouldPersistTaps='handled'
-          showsVerticalScrollIndicator={false}
-        />
+          <FlatList
+            data={users}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderItem}
+            ListEmptyComponent={renderEmptyList}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            keyboardShouldPersistTaps='handled'
+            showsVerticalScrollIndicator={false}
+          />
       )}
     </SafeAreaView>
   )

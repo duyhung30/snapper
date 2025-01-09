@@ -1,4 +1,5 @@
 import { Stack, Link } from 'expo-router';
+import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo'
 

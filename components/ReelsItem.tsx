@@ -172,10 +172,11 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
           // paddingTop: 50,
           // justifyContent: "center",
           alignItems: 'center',
-          // backgroundColor: 'black',
+          // backgroundColor: '#0c0b0a',
         }}
+        className='bg-general-800'
       >
-        <View className='flex-0.5 items-center mt-5'>
+        <View className='flex-0.5 items-center mt-5 bg-general-800'>
           <Image
             // source={{ uri: imageUrl }}
             source={imageUrl}
@@ -189,7 +190,7 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
               borderRadius: 30,
             }}
           />
-          {item.caption && (<View className='absolute bottom-14 bg-black/50 w-1/2 h-[44px] rounded-3xl justify-center items-center'>
+          {item.caption && (<View className='absolute bottom-14 bg-black/50  px-4 h-[44px] rounded-full justify-center items-center'>
             <Text className='font-JakartaSemiBold text-[16px] text-gray-200'> {item.caption} </Text>
           </View>)}
           {/* <Text className='font-JakartaBold text-lg'> {pb?.authStore.model?.username} </Text> */}
@@ -205,22 +206,22 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
               className='w-[30px] h-[30px] rounded-full border-0 border-black'
             /> */}
             <Avatar size={30} userId={item.expand?.author_id?.id} />
-            <Text className='font-JakartaBold text-xl pl-2'>
+            <Text className='font-JakartaBold text-xl pl-2 text-foreground-default'>
               {item.expand?.author_id?.username || 'Unknown user'}
             </Text>
           </View>
         </View>
 
         <View className='flex-0.5 items-center w-full mt-10'>
-          <View className='flex-row w-5/6 items-center justify-center h-55 border-2 border-black shadow-2xl rounded-3xl'>
-            <View className='flex-row w-full h-12 px-4 justify-center'>
+          <View className='flex-row w-5/6 items-center justify-center h-55 '>
+            <View className='flex-row w-full h-12 px-4 justify-center bg-general-500 rounded-full'>
               <View className='basis-2/3 items-center justify-center'>
                 <TouchableOpacity
                   className='items-center justify-center py-2 px-6'
                   // onPress={() => router.push('/(modal)/comment')}
                   onPress={() => setShowComments(true)}
                 >
-                  <Text className='font-JakartaBold text-lg'>
+                  <Text className='font-JakartaSemiBold text-foreground-default text-lg'>
                     Add a comment
                   </Text>
                 </TouchableOpacity>
@@ -230,7 +231,7 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
                   className='pl-2 py-2 pr-1'
                   onPress={ShareImage}
                 >
-                  <Ionicons name='share-outline' size={34} color='black' />
+                  <Ionicons name='share-outline' size={34} color='#f3ebe5' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -241,9 +242,9 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
                   <Ionicons
                     name={isLiked ? 'heart' : 'heart-outline'}
                     size={34}
-                    color={isLiked ? 'red' : 'black'}
+                    color={isLiked ? 'red' : '#f3ebe5'}
                   />
-                  <Text className='text-xl font-JakartaSemiBold'>
+                  <Text className='text-xl font-JakartaSemiBold text-foreground-default'>
                     {/*
                       {item.likes_count}
                     */}
@@ -257,7 +258,7 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
            */}
           <View className='flex-row items-center w-full justify-around'>
             <TouchableOpacity className='items-center mt-5' onPress={onPress}>
-              <Ionicons name='radio-button-on-sharp' size={74} color='black' />
+              <Ionicons name='radio-button-on-sharp' size={74} color='#f3ebe5' />
             </TouchableOpacity>
           </View>
         </View>

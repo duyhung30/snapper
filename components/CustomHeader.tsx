@@ -11,19 +11,19 @@ const CustomHeader = () => {
       style={{}}
     >
       <Link href={'/(root)/(tabs)/profile'} asChild>
-        <TouchableOpacity className='p-3 rounded-full'>
+        <TouchableOpacity className='p-2 rounded-full bg-general-500'>
           {/*
           <MaterialIcons name='account-circle' size={34} color='black' />
           */}
-          <Ionicons name='person-circle-outline' size={34} color='black' />
+          <Ionicons name='person-circle-outline' size={30} color='#f3ebe5' />
         </TouchableOpacity>
       </Link>
       <Link href={'/(root)/(tabs)/(chat)'} asChild>
-        <TouchableOpacity className='p-3 rounded-full'>
+        <TouchableOpacity className='p-2 rounded-full bg-general-500'>
           {/*
           <MaterialCommunityIcons name='chat-outline' size={34} color='black' />
           */}
-          <Ionicons name='chatbubble-outline' size={30} color='black' />
+          <Ionicons name='chatbubble-outline' size={28} color='#f3ebe5' />
         </TouchableOpacity>
       </Link>
     </View>

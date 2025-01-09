@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     // <View style={{ flex: 1, backgroundColor: '#181614' }} >
-    <View style={{ flex: 1 }} >
+    <View className='bg-general-800' style={{ flex: 1 }} >
       {/* <Camera /> */}
       {/*
       */}

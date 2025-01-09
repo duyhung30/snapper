@@ -4,7 +4,7 @@ import CustomButton from '@/components/CustomButton'
 
 const Welcome = () => {
   return (
-    <SafeAreaView className='flex-1 items-center justify-end space-y-6 bg-white'>
+    <SafeAreaView className='flex-1 items-center justify-end space-y-6 bg-background-default' >
       {/* <View className='w-1/2'>
         <Link href={'/(auth)/sign-up'} asChild>
           <TouchableOpacity className='rounded-full items-center p-3 bg-blue-300'>
@@ -20,7 +20,7 @@ const Welcome = () => {
           </TouchableOpacity>
         </Link>
       </View> */}
-      <CustomButton
+      < CustomButton
         title={'Sign up'}
         onPress={() => { router.push('/(auth)/sign-up') }}
         className='items-center w-5/6'
@@ -29,7 +29,7 @@ const Welcome = () => {
       <CustomButton
         title={'Sign In'}
         onPress={() => { router.push('/(auth)/sign-in') }}
-        className='items-center bg-gray-400 w-5/6 mb-14'
+        className='items-center bg-secondary-600 w-5/6 mb-14'
       />
     </SafeAreaView>
   )

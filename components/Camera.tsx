@@ -223,15 +223,15 @@ const Camera = () => {
 
           <View style={styles.controlsContainer}>
             <TouchableOpacity onPress={pickImage}>
-              <Ionicons name="images" size={40} color="black" />
+              <Ionicons name="images" size={40} color="#f3ebe5" />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={takePicture}>
-              <Ionicons name="radio-button-on-sharp" size={90} color="black" />
+              <Ionicons name="radio-button-on-sharp" size={110} color="white" />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={toggleCameraFacing}> <Animated.View style={animatedStyle}>
-              <Ionicons name="sync-sharp" size={44} color="black" />
+              <Ionicons name="sync-sharp" size={44} color="#f3ebe5" />
             </Animated.View>
             </TouchableOpacity>
           </View>
@@ -256,7 +256,7 @@ const Camera = () => {
                 className='absolute bottom-0 w-full items-center'
               >
                 <TextInput
-                  className='bg-black/50 w-1/2 h-[44px] rounded-3xl items-center justify-center font-JakartaSemiBold text-[16px] text-gray-200'
+                  className='bg-black/50 w-1/2 py-3 rounded-full items-center justify-center font-JakartaSemiBold text-[16px] text-gray-200'
                   placeholder='Add a caption'
                   textAlign='center'
                   value={caption}
@@ -309,6 +309,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     height: windowHeight,
+    // backgroundColor: "#0c0b0a",
+    backgroundColor: "#181614",
   },
   message: {
     textAlign: 'center',

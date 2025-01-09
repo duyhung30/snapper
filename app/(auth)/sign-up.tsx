@@ -67,8 +67,8 @@ const SignUp = () => {
   }
 
   return (
-    <SafeAreaView className='flex-1 items-center bg-white'>
-      <Text className='font-JakartaBold text-2xl'>Create your account</Text>
+    <SafeAreaView className='flex-1 items-center bg-background-default pt-10'>
+      <Text className='font-JakartaBold text-2xl text-foreground-default'>Create your account</Text>
 
       <View className='p-10 w-full'>
         {error ? (
@@ -78,6 +78,9 @@ const SignUp = () => {
         <InputField
           label='Name'
           placeholder='Enter name'
+          labelStyle='text-foreground-default'
+          inputStyle='bg-general-600'
+          placeholderTextColor={'#b3a398'}
           value={form.username}
           // onChangeText={handleInputChange('username')}
           onChangeText={(value) => setForm({ ...form, username: value })}
@@ -89,6 +92,9 @@ const SignUp = () => {
           label='Email'
           placeholder='Enter email'
           value={form.email}
+          inputStyle='bg-general-600'
+          labelStyle='text-foreground-default'
+          placeholderTextColor={'#b3a398'}
           // onChangeText={handleInputChange('email')}
           onChangeText={(value) => setForm({ ...form, email: value })}
           autoCapitalize='none'
@@ -101,6 +107,9 @@ const SignUp = () => {
         <InputField
           label='Password'
           placeholder='Enter password'
+          placeholderTextColor={'#b3a398'}
+          labelStyle='text-foreground-default'
+          inputStyle='bg-general-600'
           value={form.password}
           // onChangeText={handleInputChange('password')}
           onChangeText={(value) => setForm({ ...form, password: value })}
@@ -122,7 +131,7 @@ const SignUp = () => {
           className='text-lg text-center text-general-200 mt-10'
         >
           <Text> Already have an account?{' '} </Text>
-          <Text className='text-primary-500'>Log In</Text>
+          <Text className='text-foreground-default'>Log In</Text>
         </Link>
       </View>
     </SafeAreaView>

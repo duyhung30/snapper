@@ -273,15 +273,15 @@ const ChatRoom = () => {
     ) : null
 
   return (
-    <SafeAreaView className='flex-1'>
+    <SafeAreaView className='flex-1 bg-general-800'>
       {/* Header */}
       <View className='flex-row items-center p-4 shadow'>
         {/* Back button positioned absolutely on the left */}
         <TouchableOpacity
           onPress={() => router.back()}
-          className='absolute left-1 z-10'
+          className='absolute left-1 z-10 bg-general-500 p-2 rounded-full'
         >
-          <Entypo name='chevron-left' size={34} color='black' />
+          <Entypo name='chevron-left' size={34} color='#f3ebe5' />
         </TouchableOpacity>
         {/* Center container for avatar and name */}
         <View className='flex-1 flex-row justify-center items-center'>
@@ -297,7 +297,7 @@ const ChatRoom = () => {
               cachePolicy='memory-disk' // Enable caching
             /> */}
             <Avatar size={30} userId={Array.isArray(userId) ? userId[0] : userId} styles={{ marginRight: 10 }} />
-            <Text className='font-JakartaSemiBold text-lg'>{receiverName}</Text>
+            <Text className='font-JakartaSemiBold text-lg text-foreground-default'>{receiverName}</Text>
           </View>
         </View>
       </View>
@@ -319,13 +319,13 @@ const ChatRoom = () => {
           inverted={false} // Set to true if you want newest comments at the bottom
         />
 
-        <View className='flex-row items-center border-t border-gray-300 p-2'>
+        <View className='flex-row items-center p-2'>
           <TextInput
-            className='flex-1 border border-gray-300 rounded-[20px] px-[15px] py-[12px] mr-2'
+            className='flex-1 bg-general-600 rounded-[20px] px-[15px] py-[12px] mr-2 font-JakartaSemiBold font-2xl text-foreground-default'
             value={newMessage}
             onChangeText={setNewMessage}
             placeholder='Type a message...'
-            placeholderTextColor={'black'}
+            placeholderTextColor={'#f3ebe5'}
             editable={!isLoading}
             multiline={true}
           />
@@ -338,7 +338,7 @@ const ChatRoom = () => {
             <FontAwesome
               name='send'
               size={24}
-              color={newMessage.trim() ? 'blue' : 'gray'}
+              color={newMessage.trim() ? '#0286ff' : 'gray'}
             // color='white'
             />
           </TouchableWithoutFeedback>

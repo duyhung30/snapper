@@ -6,6 +6,7 @@ import 'react-native-reanimated'
 import { PocketBaseProvider } from '@/context/pocketbase'
 import { AuthProvider } from '@/context/auth'
 import { HoldMenuProvider } from 'react-native-hold-menu'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
@@ -40,12 +41,12 @@ export default function RootLayout() {
   return (
     <PocketBaseProvider>
       <AuthProvider>
-        <HoldMenuProvider theme='dark'>
+        <HoldMenuProvider iconComponent={Ionicons} theme={'dark'}>
           <Stack>
             <Stack.Screen name='index' options={{ headerShown: false }} />
             <Stack.Screen name='(auth)' options={{ headerShown: false }} />
             <Stack.Screen name='(root)' options={{ headerShown: false }} />
-            <Stack.Screen name='(chat)' options={{ headerShown: false }} />
+            {/* <Stack.Screen name='(chat)' options={{ headerShown: false }} /> */}
             {/* <Stack.Screen */}
             {/*   name='(modal)/camera' */}
             {/*   options={{ */}

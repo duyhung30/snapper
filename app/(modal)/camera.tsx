@@ -25,7 +25,7 @@ import Animated, {
 import { router } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useState, useRef } from 'react'
-import { useAuth } from '@/context/auth';
+import { useAuth } from '@/context/auth'
 import CustomAlert from '@/components/CustomAlert'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window')
@@ -35,7 +35,8 @@ const CameraModal = () => {
   const [permission, requestPermission] = useCameraPermissions()
   //preview and captured image
   const [previewVisible, setPreviewVisible] = useState(false)
-  const [capturedImage, setCapturedImage] = useState<CameraCapturedPicture | null>()
+  const [capturedImage, setCapturedImage] =
+    useState<CameraCapturedPicture | null>()
   const [isLoading, setIsLoading] = useState(false)
   const [alertConfig, setAlertConfig] = useState({
     visible: false,
@@ -45,7 +46,7 @@ const CameraModal = () => {
   })
   const cameraRef = useRef<CameraView>(null)
 
-  const { updateUserAvatar } = useAuth();
+  const { updateUserAvatar } = useAuth()
 
   const rotation = useSharedValue(0)
   const animatedStyle = useAnimatedStyle(() => {
@@ -122,7 +123,7 @@ const CameraModal = () => {
     } finally {
       setIsLoading(false)
     }
-  };
+  }
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -228,34 +229,30 @@ const CameraModal = () => {
                   <Animated.View
                     entering={FadeIn}
                     exiting={FadeOut}
-                    className="absolute inset-0 items-center justify-center bg-black/30"
+                    className='absolute inset-0 items-center justify-center bg-black/30'
                     style={{ width: windowWidth, height: windowHeight * 0.6 }}
                   >
                     <ActivityIndicator
-                      size="large"
+                      size='large'
                       style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }] }}
-                      color="#ffffff"
+                      color='#ffffff'
                     />
                   </Animated.View>
                 )}
               </View>
               <View className='h-[20%] w-full flex-row justify-around items-center'>
-                <TouchableOpacity
-                  onPress={retakePicture}
-                  disabled={isLoading}
-                >
-                  <Text className={`font-JakartaSemiBold text-xl ${isLoading ? 'text-gray-400' : 'text-white'}`}>
-                    Retake
-                  </Text>
+                <TouchableOpacity onPress={retakePicture} disabled={isLoading}>
+                  {/* <Text className={`font-JakartaSemiBold text-xl ${isLoading ? 'text-gray-400' : 'text-white'}`}> */}
+                  {/*   Retake */}
+                  {/* </Text> */}
+                  <Ionicons name='close' size={54} color='white' />
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  onPress={saveImage}
-                  disabled={isLoading}
-                >
-                  <Text className={`font-JakartaSemiBold text-xl ${isLoading ? 'text-gray-400' : 'text-white'}`}>
-                    Save
-                  </Text>
+                <TouchableOpacity onPress={saveImage} disabled={isLoading}>
+                  {/* <Text className={`font-JakartaSemiBold text-xl ${isLoading ? 'text-gray-400' : 'text-white'}`}> */}
+                  {/*   Save */}
+                  {/* </Text> */}
+                  <Ionicons name='save' size={44} color='white' />
                 </TouchableOpacity>
               </View>
             </View>
@@ -268,7 +265,7 @@ const CameraModal = () => {
         type={alertConfig.type}
         title={alertConfig.title}
         message={alertConfig.message}
-        onClose={() => setAlertConfig(prev => ({ ...prev, visible: false }))}
+        onClose={() => setAlertConfig((prev) => ({ ...prev, visible: false }))}
       />
     </>
   )

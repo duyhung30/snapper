@@ -58,8 +58,8 @@ const SignIn = () => {
   }
 
   return (
-    <SafeAreaView className='flex-1 items-center bg-white'>
-      <Text className='font-JakartaBold text-2xl'>Welcome Back</Text>
+    <SafeAreaView className='flex-1 items-center bg-background-default pt-10'>
+      <Text className='font-JakartaBold text-2xl text-foreground-default'>Welcome Back</Text>
 
       <View className='p-10 w-full'>
         {error ? (
@@ -70,6 +70,9 @@ const SignIn = () => {
           label='Email'
           placeholder='Enter email'
           value={form.email}
+          placeholderTextColor={'#b3a398'}
+          labelStyle='text-foreground-default'
+          inputStyle='bg-general-600'
           // onChangeText={handleInputChange('email')}
           onChangeText={(value) => setForm({ ...form, email: value })}
           autoCapitalize='none'
@@ -83,6 +86,9 @@ const SignIn = () => {
           label='Password'
           placeholder='Enter password'
           value={form.password}
+          placeholderTextColor={'#b3a398'}
+          labelStyle='text-foreground-default'
+          inputStyle='bg-general-600'
           // onChangeText={handleInputChange('password')}
           onChangeText={(value) => setForm({ ...form, password: value })}
           secureTextEntry={true}
@@ -103,7 +109,7 @@ const SignIn = () => {
           className='text-lg text-center text-general-200 mt-10'
         >
           <Text>Don't have an account?{' '} </Text>
-          <Text className='text-primary-500'>Sign Up</Text>
+          <Text className='text-foreground-default'>Sign Up</Text>
         </Link>
 
         {/* Optional: Add Forgot Password link */}
