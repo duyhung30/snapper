@@ -145,7 +145,8 @@ const ChatRoom = () => {
                 ])
                 // fetchMessages()
               } catch (error) {
-                console.error('Error fetching new message:', error)
+                // console.error('Error fetching new message:', error)
+                console.log('Error fetching new message:', error)
               }
             }
           }
@@ -186,7 +187,8 @@ const ChatRoom = () => {
       // fetchMessages()
       setIsTyping(false) // Reset typing state after sending
     } catch (err) {
-      console.error('Failed to send message:', err)
+      // console.error('Failed to send message:', err)
+      console.log('Failed to send message:', err)
     }
   }
 
@@ -201,6 +203,27 @@ const ChatRoom = () => {
     }
   }, [newMessage])
 
+  const formatTimeAgo = (dateString: string): string => {
+    const now = new Date()
+    const commentDate = new Date(dateString)
+    const secondsAgo = Math.floor(
+      (now.getTime() - commentDate.getTime()) / 1000,
+    )
+
+    if (secondsAgo < 60) {
+      return `${secondsAgo} seconds ago`
+    } else if (secondsAgo < 3600) {
+      const minutes = Math.floor(secondsAgo / 60)
+      return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`
+    } else if (secondsAgo < 86400) {
+      const hours = Math.floor(secondsAgo / 3600)
+      return `${hours} hour${hours !== 1 ? 's' : ''} ago`
+    } else {
+      const days = Math.floor(secondsAgo / 86400)
+      return `${days} day${days !== 1 ? 's' : ''} ago`
+    }
+  }
+
   const renderMessage = ({ item }: { item: Message }) => (
     <View
       className={`flex-row my-2 items-center ${item.sender === currentUserId
@@ -208,6 +231,13 @@ const ChatRoom = () => {
         : 'justify-start pl-2'
         }`}
     >
+      {/* Show timestamp on the left for current user's messages */}
+      {item.sender === currentUserId && (
+        <Text style={{ fontSize: 11, color: '#666', marginTop: 2, marginRight: 2 }}>
+          {formatTimeAgo(item.created)}
+        </Text>
+      )}
+
       {/* Show avatar only for messages from the other user */}
       {item.sender !== currentUserId && (
         // <Image
@@ -224,8 +254,8 @@ const ChatRoom = () => {
       )}
 
       <View
-        className={`p-3 rounded-lg max-w-[80%] ml-2 ${item.sender === currentUserId
-          ? 'bg-blue-500 rounded-xl'
+        className={`p-3 rounded-lg max-w-[80%] ml-1 ${item.sender === currentUserId
+          ? 'bg-general-400 rounded-xl'
           : 'bg-gray-300 rounded-xl'
           }`}
       >
@@ -236,6 +266,13 @@ const ChatRoom = () => {
           {item.text}
         </Text>
       </View>
+      {/* Show timestamp on the right for other users' messages */}
+      {item.sender !== currentUserId && (
+        <Text style={{ fontSize: 11, color: '#666', marginTop: 4, marginLeft: 8 }}>
+          {formatTimeAgo(item.created)}
+        </Text>
+      )}
+
     </View>
   )
 
