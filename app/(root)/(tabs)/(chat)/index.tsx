@@ -63,7 +63,8 @@ const ChatList = () => {
         setUsers(users)
       }
     } catch (error) {
-      console.error('Failed to fetch messages:', error)
+      // console.error('Failed to fetch messages:', error)
+      console.log('Failed to fetch messages:', error)
     } finally {
       setIsLoading(false)
     }
