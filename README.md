@@ -1,50 +1,44 @@
-# Welcome to your Expo app 👋
+# Social Network Mobile App for Sharing Images
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## :star2: Introduction
 
-## Get started
+A mobile app for sharing your images with friends.
+You can post images, react and comment. This app also implement a messaging functionality so that you can chat with your friends
 
-1. Install dependencies
+## :question: What's in this repository
 
-   ```bash
-   npm install
-   ```
+My project use React Native, Expo for front-end and Node.js + Pocketbase for server side.
+So check out the [Pocketbase documentation](https://pocketbase.io/docs/)
+## :wrench: Installation
 
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Requirements:
+* Expo SDK 52.0.20 
+* Node.js >= 18.15.0
+* npm >= 9.5.0
+  
+Step-by-step introductions to get you running this app:
+### 1) Clone this repository to your local machine:
 
 ```bash
-npm run reset-project
+git clone https://github.com/duyhung30/snapper.git 
+```
+### 2) Running project
+
+```bash
+npm install (or npm i)
+npx expo start/npm start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+If you are using the Expo Go app on iphone, use this instead 
+```bash
+npm install (or npm i)
+npx expo start --tunnel
+```
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+## :raising_hand: Questions
+If you have any questions about running this code, or this project, contact me 
+* Bui Vu Duy Hung (21020142@vnu.edu.vn)
+  
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
