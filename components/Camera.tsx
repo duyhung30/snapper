@@ -271,7 +271,7 @@ const Camera = () => {
 
           <View style={styles.controlsContainer} className='mt-4'>
             <TouchableOpacity onPress={retakePicture}>
-              <Ionicons name="close" size={44} color="black" />
+              <Ionicons name="close" size={44} color="#f3ebe5" />
             </TouchableOpacity>
 
             {/* <TouchableOpacity className='bg-gray-400 rounded-full' style={{ padding: 15 }} > */}
@@ -287,13 +287,13 @@ const Camera = () => {
               {isUploading ? (
                 <ActivityIndicator size="large" color="black" />
               ) : (
-                <Ionicons name="paper-plane-outline" size={64} color="black" />
+                <Ionicons name="paper-plane-outline" size={64} color="#f3ebe5" />
               )}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={toggleCameraFacing}>
               <Animated.View style={animatedStyle}>
-                <Ionicons name="sync-sharp" size={44} color="black" />
+                <Ionicons name="sync-sharp" size={44} color="#f3ebe5" />
               </Animated.View>
             </TouchableOpacity>
           </View>
