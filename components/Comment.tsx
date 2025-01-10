@@ -68,7 +68,8 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
       }
       setComments(records)
     } catch (error) {
-      console.error('Error fetching comments:', error)
+      // console.error('Error fetching comments:', error)
+      console.log('Error fetching comments:', error)
     } finally {
       setIsLoading(false)
     }
@@ -79,7 +80,8 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
     try {
       fetchComments()
     } catch (error) {
-      console.error('Error refreshing comments:', error)
+      // console.error('Error refreshing comments:', error)
+      console.log('Error refreshing comments:', error)
     } finally {
       setRefreshing(false)
     }
@@ -112,7 +114,8 @@ const CommentModal = React.memo(({ isVisible, onClose, postId }: Props) => {
                     ...(prevComments || []),
                   ])
                 } catch (error) {
-                  console.error('Error fetching posts:', error)
+                  // console.error('Error fetching posts:', error)
+                  console.log('Error fetching posts:', error)
                 }
 
                 // const newComment = record as Comment

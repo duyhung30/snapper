@@ -147,7 +147,8 @@ const ReelsItem = React.memo(({ item, index, onPress }: Props) => {
         })
       }
     } catch (error) {
-      console.error('Like toggle failed:', error)
+      // console.error('Like toggle failed:', error)
+      console.log('Like toggle failed:', error)
       // Revert UI changes if operation fails
       setIsLiked(isLiked)
       setLikesCount(isLiked ? likesCount + 1 : likesCount - 1)

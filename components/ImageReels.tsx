@@ -73,7 +73,8 @@ const ImageReels = () => {
       //   }
       // })
     } catch (error) {
-      console.error('Error fetching posts:', error)
+      // console.error('Error fetching posts:', error)
+      console.log('Error fetching posts:', error)
     } finally {
       setIsLoading(false)
     }
@@ -120,7 +121,8 @@ const ImageReels = () => {
               // ]);
               console.log('New post added:', newPost)
             } catch (error) {
-              console.error('Error fetching new post:', error)
+              // console.error('Error fetching new post:', error)
+              console.log('Error fetching new post:', error)
             }
           }
         })
