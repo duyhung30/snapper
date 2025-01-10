@@ -68,7 +68,7 @@ const SignUp = () => {
 
   return (
     <SafeAreaView className='flex-1 items-center bg-background-default pt-10'>
-      <Text className='font-JakartaBold text-2xl text-foreground-default'>Create your account</Text>
+      <Text className='font-JakartaBold text-2xl text-foreground-default pt-10'>Create your account</Text>
 
       <View className='p-10 w-full'>
         {error ? (
@@ -130,8 +130,8 @@ const SignUp = () => {
           href='/(auth)/sign-in'
           className='text-lg text-center text-general-200 mt-10'
         >
-          <Text> Already have an account?{' '} </Text>
-          <Text className='text-foreground-default'>Log In</Text>
+          <Text> Already have an account? </Text>
+          <Text className='text-foreground-default'> Log In</Text>
         </Link>
       </View>
     </SafeAreaView>
