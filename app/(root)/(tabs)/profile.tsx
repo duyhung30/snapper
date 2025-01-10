@@ -133,7 +133,7 @@ const Profile = () => {
                   router.push("/(modal)/camera");
                 },
               },
-              { 
+              {
                 icon: "image-outline",
                 text: "Choose from library",
                 onPress: handlePickImage
@@ -173,25 +173,102 @@ const Profile = () => {
           </HoldItem>
         </View>
 
-        <View className="flex-row items-end">
+        <View className="flex-row items-end ml-3 pb-3">
           <Ionicons name="person" size={22} color="#f3ebe5" />
           <Text className="font-JakartaSemiBold text-foreground-default text-xl"> General </Text>
         </View>
 
-        <View className="flex-row items-end">
+        {/* General Section */}
+        <View className="bg-background-default p-4 border-2 border-secondary-700 rounded-2xl ml-3 mr-3">
+          <TouchableOpacity className="flex-row justify-between items-center py-3 border-b border-gray-700">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="call-outline" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Change phone number</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-between items-center py-3 border-b border-gray-700">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="help-circle-outline" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Get help</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-between items-center py-3">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="paper-plane-outline" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Share feedback</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+        </View>
+
+        <View className="flex-row items-end ml-3 pt-5 pb-3">
           <Ionicons name="share-social" size={24} color="#f3ebe5" />
           <Text className="font-JakartaSemiBold text-foreground-default text-xl"> Social </Text>
         </View>
 
-        <View className="flex-row items-end">
+        {/* Social Section */}
+        <View className="bg-background-default p-4 border-2 border-secondary-700 rounded-2xl ml-3 mr-3">
+          <TouchableOpacity className="flex-row justify-between items-center py-3 border-b border-gray-700">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="logo-tiktok" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Tiktok</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-between items-center py-3 border-b border-gray-700">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="logo-instagram" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Instagram</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-between items-center py-3">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="logo-twitter" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Twitter</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-between items-center py-3">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="star" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Đánh giá ứng dụng</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-row justify-between items-center py-3">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="newspaper" size={20} color="#fff" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Điều khoản dịch vụ</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+        </View>
+
+
+        <View className="flex-row items-end ml-3 pt-6 pb-3">
           <Ionicons name="alert-circle-sharp" size={24} color="#f3ebe5" />
           <Text className="font-JakartaSemiBold text-foreground-default text-xl"> Danger </Text>
         </View>
-        <View>
+
+        {/* General Section */}
+        <View className="bg-background-default p-4 border-2 border-secondary-700 rounded-2xl ml-3 mr-3">
+          <TouchableOpacity className="flex-row justify-between items-center py-2" onPress={signOut}>
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="exit" size={24} color="#f3ebe5" />
+              <Text className="text-white text-sm font-JakartaSemiBold">Sign Out</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#999" />
+          </TouchableOpacity>
+        </View>
+
+        {/* <View>
           <TouchableOpacity onPress={signOut}>
             <Ionicons name="exit" size={24} color="#f3ebe5" />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
 
       <CustomAlert
