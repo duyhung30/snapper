@@ -133,7 +133,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
       return { success: true }
     } catch (error) {
-      console.error('Avatar update error:', error)
+      // console.error('Avatar update error:', error)
+      console.log('Avatar update error:', error)
       return {
         success: false,
         error: error instanceof Error ? error.message : 'Failed to update avatar',
